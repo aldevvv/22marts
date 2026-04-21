@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Edit(backend/**)",
+      "Edit(frontend/app/**)",
+      "Edit(frontend/components/**)",
+      "Edit(frontend/**)"
+    ]
+  }
+}
