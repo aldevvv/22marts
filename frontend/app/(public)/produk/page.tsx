@@ -33,6 +33,7 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [showMobileFilter, setShowMobileFilter] = useState(false);
+  const [showAllCategories, setShowAllCategories] = useState(false);
 
   useEffect(() => {
     loadData();
@@ -101,7 +102,7 @@ export default function ProductsPage() {
                         {products.length}
                       </span>
                     </button>
-                    {categories.map((cat) => {
+                    {(showAllCategories ? categories : categories.slice(0, 3)).map((cat) => {
                       const count = products.filter((p) => p.categoryId === cat.id).length;
                       return (
                         <button
@@ -123,6 +124,15 @@ export default function ProductsPage() {
                         </button>
                       );
                     })}
+                    {categories.length > 3 && (
+                      <button
+                        onClick={() => setShowAllCategories(!showAllCategories)}
+                        className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 transition-colors"
+                      >
+                        <span>{showAllCategories ? "Sembunyikan" : "Kategori Lainnya"}</span>
+                        <span className="text-xs text-zinc-400">{showAllCategories ? "" : `+${categories.length - 3}`}</span>
+                      </button>
+                    )}
                   </div>
                 </div>
 
@@ -384,7 +394,7 @@ export default function ProductsPage() {
                   <span>Semua</span>
                   <span className="text-xs">{products.length}</span>
                 </button>
-                {categories.map((cat) => {
+                {(showAllCategories ? categories : categories.slice(0, 3)).map((cat) => {
                   const count = products.filter((p) => p.categoryId === cat.id).length;
                   return (
                     <button
@@ -402,6 +412,15 @@ export default function ProductsPage() {
                     </button>
                   );
                 })}
+                {categories.length > 3 && (
+                  <button
+                    onClick={() => setShowAllCategories(!showAllCategories)}
+                    className="flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-medium text-zinc-600 hover:bg-zinc-100 transition-colors"
+                  >
+                    <span>{showAllCategories ? "Sembunyikan" : "Kategori Lainnya"}</span>
+                    <span className="text-xs text-zinc-400">{showAllCategories ? "" : `+${categories.length - 3}`}</span>
+                  </button>
+                )}
               </div>
             </div>
 
